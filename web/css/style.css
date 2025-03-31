@@ -1,0 +1,75 @@
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* General */
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+header {
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+/* Nav - Barra de Navegación Estilizada */
+nav {
+  background-color: #0056b3; /* Azul oscuro */
+  padding: 15px 0;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0 20px;
+  font-size: 18px;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #ffcc00; /* Color Amarillo al Pasar el Ratón */
+}
+
+/* Ajustar el Espaciado del Contenedor */
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Footer */
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+/* Resaltar la Página Actual */
+nav a.active {
+  color: #ffcc00; /* Amarillo */
+  font-weight: bold;
+  cursor: default;
+  pointer-events: none; /* Deshabilitar el enlace */
+}
+
+/* Mejorar Visibilidad del Menú */
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0 20px;
+  font-size: 18px;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #ffcc00; /* Amarillo al Pasar el Mouse */
+}
