@@ -8,36 +8,41 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Proyectos - Mi Portafolio</title>
-
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-  
-  <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <header class="text-center bg-primary text-white py-5">
-    <h1>Mis Proyectos</h1>
-    <p>Algunos de los proyectos en los que he trabajado recientemente.</p>
-  </header>
-
-  <nav>
-    <div class="container d-flex justify-content-center py-3">
-      <a href="index.jsp">Inicio</a>
-      <a href="proyectos.jsp" class="active">Proyectos</a>
-      <a href="habilidades.jsp">Habilidades</a>
-      <a href="experiencia.jsp">Experiencia</a>
-      <a href="contacto.jsp">Contacto</a>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">MiPortafolio</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.jsp">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link active" href="proyectos.jsp">Proyectos</a></li>
+          <li class="nav-item"><a class="nav-link" href="habilidades.jsp">Habilidades</a></li>
+          <li class="nav-item"><a class="nav-link" href="experiencia.jsp">Experiencia</a></li>
+          <li class="nav-item"><a class="nav-link" href="contacto.jsp">Contacto</a></li>
+        </ul>
+      </div>
     </div>
   </nav>
 
-  <section class="container my-5">
+  <!-- Header -->
+  <header class="animate">
+    <h1>Mis Proyectos</h1>
+    <p>Aquí puedes ver algunos de los proyectos en los que he trabajado recientemente.</p>
+  </header>
+
+  <!-- Galería de Proyectos -->
+  <section class="container my-5 animate">
     <div class="row">
       <!-- Proyecto 1 -->
       <div class="col-md-4 mb-4">
@@ -74,7 +79,8 @@
     </div>
   </section>
 
-  <footer class="bg-dark text-white text-center py-3">
+  <!-- Footer -->
+  <footer>
     <p>&copy; 2025 Mi Portafolio</p>
   </footer>
 
@@ -82,5 +88,3 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-

@@ -8,6 +8,7 @@
 /* General */
 body {
   font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
 }
 
 /* Header */
@@ -18,9 +19,9 @@ header {
   padding: 60px 20px;
 }
 
-/* Nav - Barra de Navegación Estilizada */
+/* Navbar - Barra de Navegación Estilizada */
 nav {
-  background-color: #0056b3; /* Azul oscuro */
+  background-color: #0056b3;
   padding: 15px 0;
 }
 
@@ -34,14 +35,37 @@ nav a {
   transition: color 0.3s ease;
 }
 
+/* Efecto Hover */
 nav a:hover {
-  color: #ffcc00; /* Color Amarillo al Pasar el Ratón */
+  color: #ffcc00;
 }
 
-/* Ajustar el Espaciado del Contenedor */
+/* Resaltar la Página Actual */
+nav a.active {
+  color: #ffcc00;
+  font-weight: bold;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Ajuste para dispositivos móviles */
 .container {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Botón de navegación para pantallas pequeñas */
+.navbar-toggler {
+  background-color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+}
+
+.navbar-toggler-icon {
+  width: 24px;
+  height: 24px;
 }
 
 /* Footer */
@@ -51,25 +75,85 @@ footer {
   text-align: center;
   padding: 20px;
 }
-/* Resaltar la Página Actual */
-nav a.active {
-  color: #ffcc00; /* Amarillo */
-  font-weight: bold;
-  cursor: default;
-  pointer-events: none; /* Deshabilitar el enlace */
+
+/* Animación de Fade-In */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Mejorar Visibilidad del Menú */
-nav a {
+/* Aplicar la Animación */
+.animate {
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Scroll Suave */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Formulario */
+.form-control, textarea {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 12px;
+  font-size: 16px;
+}
+
+/* Botón de Enviar */
+button {
+  background-color: #007bff;
   color: white;
-  text-decoration: none;
-  font-weight: bold;
-  margin: 0 20px;
-  font-size: 18px;
-  display: inline-block;
-  transition: color 0.3s ease;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-nav a:hover {
-  color: #ffcc00; /* Amarillo al Pasar el Mouse */
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive para Tablets y Teléfonos */
+@media (max-width: 768px) {
+  nav a {
+    margin: 0 10px;
+    font-size: 16px;
+  }
+
+  header {
+    padding: 40px 10px;
+  }
+
+  .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  footer {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  nav {
+    padding: 10px;
+  }
+
+  nav a {
+    font-size: 14px;
+    margin: 5px;
+  }
+
+  header {
+    font-size: 18px;
+  }
 }
