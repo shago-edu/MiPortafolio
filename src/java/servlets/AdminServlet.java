@@ -6,7 +6,9 @@ package servlets;
 
 import db.DatabaseConnection;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -20,30 +22,35 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        HttpSession session = request.getSession(false);
+
+        // Verificación de sesión
+        if (session == null || session.getAttribute("username") == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
         List<String[]> mensajes = new ArrayList<>();
 
         try (Connection conn = DatabaseConnection.getConnection()) {
-            String query = "SELECT id, nombre, email, mensaje, fecha FROM mensajes_contacto ORDER BY fecha DESC";
+            String query = "SELECT * FROM mensajes_contacto";
             PreparedStatement stmt = conn.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                String[] mensaje = {
-                    rs.getString("id"),
-                    rs.getString("nombre"),
-                    rs.getString("email"),
-                    rs.getString("mensaje"),
-                    rs.getString("fecha")
-                };
-                mensajes.add(mensaje);
+                mensajes.add(new String[]{
+                        String.valueOf(rs.getInt("id")),
+                        rs.getString("nombre"),
+                        rs.getString("email"),
+                        rs.getString("mensaje"),
+                        rs.getString("fecha")
+                });
             }
-
-            request.setAttribute("mensajes", mensajes);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("error", "Error al obtener los mensajes.");
         }
 
+        request.setAttribute("mensajes", mensajes);
         request.getRequestDispatcher("admin.jsp").forward(request, response);
     }
-} 
+}

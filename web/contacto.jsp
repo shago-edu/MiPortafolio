@@ -4,72 +4,82 @@
     Author     : DesktopAMD
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contacto - Mi Portafolio</title>
-  <!-- Bootstrap CSS -->
+  <title>Contacto</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">MiPortafolio</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.jsp">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="proyectos.jsp">Proyectos</a></li>
-          <li class="nav-item"><a class="nav-link" href="habilidades.jsp">Habilidades</a></li>
-          <li class="nav-item"><a class="nav-link" href="experiencia.jsp">Experiencia</a></li>
-          <li class="nav-item"><a class="nav-link active" href="contacto.jsp">Contacto</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <div class="container mt-5">
+    <h2>Contáctame</h2>
 
-  <!-- Header -->
-  <header class="animate">
-    <h1>Contacto</h1>
-    <p>Envíame un mensaje y me pondré en contacto contigo lo antes posible.</p>
-  </header>
+    <!-- Mostrar Mensaje de Confirmación o Error -->
+    <%
+      String success = request.getParameter("success");
+      String error = request.getParameter("error");
+      if ("true".equals(success)) {
+    %>
+      <div class="alert alert-success">✅ Tu mensaje ha sido enviado con éxito. ¡Gracias por contactarnos!</div>
+    <% } else if ("1".equals(error)) { %>
+      <div class="alert alert-danger">❗ Ocurrió un error al enviar tu mensaje. Inténtalo de nuevo.</div>
+    <% } %>
 
-  <!-- Formulario de Contacto -->
-  <section class="container my-5 animate">
-    <h2 class="text-center mb-4">Formulario de Contacto</h2>
-    <form action="ContactoServlet" method="post" class="mx-auto col-md-8">
+    <!-- Formulario de Contacto -->
+    <form action="ContactoServlet" method="post" novalidate>
+      
+      <!-- Campo Nombre -->
       <div class="mb-3">
-        <label for="nombre" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="nombre" name="nombre" required />
+        <label for="nombre" class="form-label">Nombre completo</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" 
+               placeholder="Ingresa tu nombre" required minlength="3" />
+        <div class="invalid-feedback">El nombre debe tener al menos 3 caracteres.</div>
       </div>
 
+      <!-- Campo Email -->
       <div class="mb-3">
-        <label for="email" class="form-label">Correo Electrónico</label>
-        <input type="email" class="form-control" id="email" name="email" required />
+        <label for="email" class="form-label">Correo electrónico</label>
+        <input type="email" class="form-control" id="email" name="email"
+               placeholder="correo@ejemplo.com" required />
+        <div class="invalid-feedback">Por favor, ingresa un correo electrónico válido.</div>
       </div>
 
+      <!-- Campo Mensaje -->
       <div class="mb-3">
         <label for="mensaje" class="form-label">Mensaje</label>
-        <textarea class="form-control" id="mensaje" name="mensaje" rows="5" required></textarea>
+        <textarea class="form-control" id="mensaje" name="mensaje" 
+                  rows="5" required minlength="10"></textarea>
+        <div class="invalid-feedback">El mensaje debe tener al menos 10 caracteres.</div>
       </div>
 
+      <!-- Botón de Enviar -->
       <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
     </form>
-  </section>
+  </div>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Mi Portafolio</p>
-  </footer>
+  <!-- Bootstrap JS para Validación -->
+  <script>
+    (function () {
+      'use strict'
+      const forms = document.querySelectorAll('.needs-validation')
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+      Array.from(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+    })()
+  </script>
 </body>
+
 </html>
+

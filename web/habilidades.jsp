@@ -4,59 +4,52 @@
     Author     : DesktopAMD
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*, java.util.*" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Habilidades - Mi Portafolio</title>
-  <!-- Bootstrap CSS -->
+  <title>Habilidades</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">MiPortafolio</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.jsp">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="proyectos.jsp">Proyectos</a></li>
-          <li class="nav-item"><a class="nav-link active" href="habilidades.jsp">Habilidades</a></li>
-          <li class="nav-item"><a class="nav-link" href="experiencia.jsp">Experiencia</a></li>
-          <li class="nav-item"><a class="nav-link" href="contacto.jsp">Contacto</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <div class="container mt-5">
+    <h2>Mis Habilidades</h2>
 
-  <!-- Header -->
-  <header class="animate">
-    <h1>Mis Habilidades</h1>
-    <p>Aquí puedes ver las principales habilidades que he adquirido a lo largo de mi carrera.</p>
-  </header>
-
-  <!-- Lista de Habilidades -->
-  <section class="container my-5 animate">
-    <ul class="list-group">
-      <li class="list-group-item"><i class="bi bi-code-slash"></i> Desarrollo Web (HTML, CSS, JavaScript)</li>
-      <li class="list-group-item"><i class="bi bi-database"></i> Bases de Datos (MySQL, SQL Server)</li>
-      <li class="list-group-item"><i class="bi bi-brush"></i> Diseño UX/UI</li>
-      <li class="list-group-item"><i class="bi bi-gear"></i> Programación Backend (Java, JSP, Servlets)</li>
-    </ul>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Mi Portafolio</p>
-  </footer>
-
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <%
+      Connection conn = null;
+      PreparedStatement stmt = null;
+      ResultSet rs = null;
+      try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mi_portafolio", "root", ""); // Ajusta según tu configuración
+        String query = "SELECT nombre, nivel FROM habilidades ORDER BY nombre ASC";
+        stmt = conn.prepareStatement(query);
+        rs = stmt.executeQuery();
+    %>
+      <ul class="list-group">
+        <%
+          boolean hasData = false;
+          while (rs.next()) {
+            hasData = true;
+        %>
+        <li class="list-group-item"><strong><%= rs.getString("nombre") %></strong> - Nivel: <%= rs.getString("nivel") %></li>
+        <% } %>
+        <% if (!hasData) { %>
+          <li class="list-group-item">No hay habilidades disponibles.</li>
+        <% } %>
+      </ul>
+    <% 
+      } catch (Exception e) {
+        out.println("<p>Error al obtener habilidades: " + e.getMessage() + "</p>");
+      } finally {
+        if (rs != null) try { rs.close(); } catch (SQLException e) {}
+        if (stmt != null) try { stmt.close(); } catch (SQLException e) {}
+        if (conn != null) try { conn.close(); } catch (SQLException e) {}
+      }
+    %>
+  </div>
 </body>
 </html>
