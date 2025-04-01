@@ -75,7 +75,7 @@ public class EditServlet extends HttpServlet {
 
         try (Connection conn = DatabaseConnection.getConnection()) {
             String query = "";
-            PreparedStatement stmt;
+            PreparedStatement stmt = null;
 
             if ("mensaje".equals(type)) {
                 String nombre = request.getParameter("nombre");

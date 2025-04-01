@@ -45,7 +45,7 @@
   <!-- Sección de Bienvenida -->
   <section class="container my-5 animate">
     <h2>Sobre Mí</h2>
-    <p>Hola, soy [Tu Nombre]. Soy desarrollador web con experiencia en Java, JSP, y Bootstrap.</p>
+    <p>Hola, soy Santiago Parra. Soy desarrollador web con experiencia en Java, JSP, y Bootstrap.</p>
   </section>
 
   <!-- Footer -->
